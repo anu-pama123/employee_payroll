@@ -160,7 +160,7 @@ select {
 .submitButton {
     border: none;
     background-color: #f5f5f5;
-    margin-right: 30    px;
+    margin-right: 3 0px;
 }
 
 .cancelButton {
@@ -178,7 +178,7 @@ select {
         padding: 44px 20px;
     }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 300px) {
     .form {
         margin-top: 10px;
     }
@@ -207,3 +207,8 @@ select {
         align-items: flex-start;
     }
 }
+    error-output {
+        font-size: 12px;
+        font-style: italic;
+        color: red;
+    }
