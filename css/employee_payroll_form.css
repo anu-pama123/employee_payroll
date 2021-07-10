@@ -207,13 +207,6 @@ select {
         align-items: flex-start;
     }
 }
-<<<<<<< HEAD
-    error-output {
-        font-size: 12px;
-        font-style: italic;
-        color: red;
-    }
-=======
 
 error-output {
     margin-left: 10px;
@@ -221,4 +214,3 @@ error-output {
     font-style: italic;
     color: red;
 }
->>>>>>> uc10_validate_name
