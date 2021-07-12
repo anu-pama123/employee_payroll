@@ -16,46 +16,70 @@ window.addEventListener('DOMContentLoaded', (event) => {
 }); 
 
 const salary = document.querySelector('#salary');
-    const output = document.querySelector('.salary-output');
-    output.textContent = salary.value;  
-    salary.addEventListener('input', function() {
-        output.textContent = salary.value;
-    });                 
+const output = document.querySelector('.salary-output');
+output.textContent = salary.value;  
+salary.addEventListener('input', function() {
+    output.textContent = salary.value;
+});                 
 
-    const save = () =>  {
-        try {
-            let employeePayrollData = createEmployeePayroll();
-        } catch (e) {
-            return;
-        }
-        
+const save = () =>  {
+    try {
+        let employeePayrollData = createEmployeePayroll();
+        createAndUpdateStorage(employeePayrollData);
+    } catch (e) {
+        return;
+    }
+}   
 
-    const createEmployeePayroll= () => {
-        let employeePayrollData = new EmployeePayrollData;
-        try {
-            employeePayrollData.name = getInputValueById('#name');
-        } catch (e) {
-            setTextValue('.text-error', e);
-            throw e;
+function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if(employeePayrollList != undefined) {
+        employeePayrollList.push(EmployeePayrollData);
+    } else {
+        employeePayrollList = [employeePayrollData]
+    }
+    alert(employeePayrollList.toString());
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
+}
+
+const createEmployeePayroll= () => {
+    let employeePayrollData = new EmployeePayrollData;
+    try {
+        employeePayrollData.name = getInputValueById('#name');
+    } catch (e) {
+        setTextValue('.text-error', e);
+        throw e;
+    }
+
+    function createAndUpdateStorage(employeePayrollData) {
+        let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+        if(employeePayrollList != undefined) {
+            employeePayrollList.push(EmployeePayrollData);
+        } else {
+            employeePayrollList = [employeePayrollData]
         }
-        employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
-        employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
-        employeePayrollData.department = getSelectedValues('[name=department]');
-        employeePayrollData.salary = getInputValueById('#salary'); 
-        employeePayrollData.note = getInputValueById('#notes');
-        let date = getInputValueById('#day')+" "+getInputValueById('#month')+" "+getInputValueById('#year');
-        employeePayrollData.date = Date.parse(date);
+        alert(employeePayrollList.toString());
+        localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
+    }
+
+    employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
+    employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
+    employeePayrollData.department = getSelectedValues('[name=department]');
+    employeePayrollData.salary = getInputValueById('#salary'); 
+    employeePayrollData.note = getInputValueById('#notes');
+    let date = getInputValueById('#day')+" "+getInputValueById('#month')+" "+getInputValueById('#year');
+    employeePayrollData.date = Date.parse(date);
     alert(employeePayrollData.toString());
     return employeePayrollData;
 }
 
 const getSelectedValues = (propertyValue) => {
-        let allItems = document.querySelectorAll(propertyValue);
-        let selItems = [];
-        allItems.forEach(item => {
-            if(item.checked) selItems.push(item.value);
-        }); 
-        return selItems;
+    let allItems = document.querySelectorAll(propertyValue);
+    let selItems = [];
+    allItems.forEach(item => {
+        if(item.checked) selItems.push(item.value);
+    }); 
+    return selItems;
 }
 
 const getInputValueById = (id) => {
@@ -67,4 +91,3 @@ const getInputElementByValue = (id) => {
     let value = document.getElementById(id).value;
     return value;
 }
-} 

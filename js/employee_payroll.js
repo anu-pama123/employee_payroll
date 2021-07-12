@@ -12,23 +12,23 @@ class EmployeePayrollData {
     set name(name) {
         let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
         if (nameRegex.test(name))
-            this._name = name;
-            else throw "Name is incorrect";    
-        }
+        this._name = name;
+        else throw "Name is incorrect";    
+    }
 
-        get profilePic() { 
-            return this._profilePic;
-        } 
-        set profilePic(profilePic) {
-            this._profilePic = profilePic;
-        }
+    get profilePic() { 
+        return this._profilePic;
+    } 
+    set profilePic(profilePic) {
+        this._profilePic = profilePic;
+    }
 
-        get gender() { 
-            return this._gender;
-        } 
-        set gender(gender) {
-            this._gender = gender;
-        }            
+    get gender() { 
+        return this._gender;
+    } 
+    set gender(gender) {
+        this._gender = gender;
+    }            
 
     get department() { 
         return this._department;
